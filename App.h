@@ -26,6 +26,8 @@ public:
     void mouseDrag(float x, float y);
     
     int displayArr[9];
+    int playArr[9];
+    int playerTurn = 1;
     //Rect * r1;
     //Rect * r2;
 };

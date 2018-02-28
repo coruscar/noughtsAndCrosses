@@ -20,39 +20,22 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
     mx = 0.0;
     my = 0.0;
     
-    for (int i = 0; i < sizeof(App::displayArr); i++) {App::displayArr[i]=0;}
-	//rVec.push_back(new Rect(0.0, 0.0, .4, .4));
-	//rVec.push_back(new Rect(.3, .4, .5, .6));
+    for (int i = 0; i < 9; i++) {displayArr[i] = 0;}
+    for (int i = 0; i < 9; i++) {playArr[i] = 1;}
     
     
-//    //black square rendering
-//    //TODO change to rect object later
-//    //glClearColor(0.0, 0.0, 0.0, 1.0);
-//    glColor3f(0.5, 0.5, 1.0);
-//    basicRec(-.3, 1 , .6, .6);
-//    basicRec(-1, 1 , .6, .6);
-//    basicRec(.4, 1 , .6, .6);
-//    
-//    basicRec(-.3, .3 , .6, .6);
-//    basicRec(-1, .3 , .6, .6);
-//    basicRec(.4, .3 , .6, .6);
-//    
-//    basicRec(-.3, -.4 , .6, .6);
-//    basicRec(-1, -.4 , .6, .6);
-//    basicRec(.4, -.4 , .6, .6);
     
-    rVec.push_back(new Rect(-.3, 1, .6, .6));
-    rVec.push_back(new Rect(-1, 1 , .6, .6));
-    rVec.push_back(new Rect(.4, 1 , .6, .6));
+    rVec.push_back(new Rect(-1, 1 , .6, .6)); // 1
+    rVec.push_back(new Rect(-.3, 1, .6, .6)); // 2
+    rVec.push_back(new Rect(.4, 1 , .6, .6)); // 3
     
-    rVec.push_back(new Rect(-.3, .3 , .6, .6));
-    rVec.push_back(new Rect(-1, .3 , .6, .6));
-    rVec.push_back(new Rect(.4, .3 , .6, .6));
+    rVec.push_back(new Rect(-1, .3 , .6, .6)); // 4
+    rVec.push_back(new Rect(-.3, .3 , .6, .6)); // 5
+    rVec.push_back(new Rect(.4, .3 , .6, .6)); // 6
     
-    rVec.push_back(new Rect(-.3, -.4 , .6, .6));
-    rVec.push_back(new Rect(-1, -.4 , .6, .6));
-    rVec.push_back(new Rect(.4, -.4 , .6, .6));
-    
+    rVec.push_back(new Rect(-1, -.4 , .6, .6)); // 7
+    rVec.push_back(new Rect(-.3, -.4 , .6, .6)); // 8
+    rVec.push_back(new Rect(.4, -.4 , .6, .6)); // 9
     
 
     pPos.push_back(new Vec(-.7, .7, 0)); // 1
@@ -101,74 +84,48 @@ void App::draw() {
     basicRec(-1, .4, 2, .1);
     basicRec(-1, -.3, 2, .1);
     
-//    //black square rendering
-//    //TODO change to rect object later
-//    //glClearColor(0.0, 0.0, 0.0, 1.0);
-//    glColor3f(0.5, 0.5, 1.0);
-//    basicRec(-.3, 1 , .6, .6);
-//    basicRec(-1, 1 , .6, .6);
-//    basicRec(.4, 1 , .6, .6);
-//    
-//    basicRec(-.3, .3 , .6, .6);
-//    basicRec(-1, .3 , .6, .6);
-//    basicRec(.4, .3 , .6, .6);
-//    
-//    basicRec(-.3, -.4 , .6, .6);
-//    basicRec(-1, -.4 , .6, .6);
-//    basicRec(.4, -.4 , .6, .6);
-    
-    
     // Set Color
     glColor3f(1.0, 1.0, 1.0);
 
     
-//    std::vector<Vec *> aPos; //actual positions vector
-    
-//    for (int i = 0; i < sizeof(displayArr) - 1; i++ ){
-//        if (displayArr[i] == 0){
-//            //don't print
-//            continue;
-//        } else if (displayArr[i] == 1){
-//            pPos[i]->setCircle(false);
-//            aPos.push_back(pPos[i]);
-//            //print X
-//        } else if (displayArr[i] == 2){
-//            pPos[i]->setCircle(true);
-//            aPos.push_back(pPos[i]);
-//            //print O
-//        } else {
-//            continue;
-//        }
-//    }
-    
-    std::cout << "pPos[0]->getX() = " << pPos[0]->getX() << std::endl;
-    int j = 0;
-    for (vector<Vec*>::iterator i = pPos.begin(); i != pPos.end(); i++) {
-        
-        for (int k = 0; k < sizeof(App::displayArr); k++) {
-            std::cout << "App::displayArr[k]" << App::displayArr[k] << std::endl;
-        }
+    printf("contense of displayArr[] {");
+    for (int k = 0; k < 9; k++) { //hardcoded for because it was overflowing with sizeof
+        printf("%d, ",displayArr[k]);
+        //std::cout << "displayArr[" << k << "] = " << displayArr[k] << std::endl;
+    }
+    printf("}\n");
+    for (int j = 0; j <= 9; j++){
         if (displayArr[j] == 1){
-            TTT(0, *i); // x
+            //printf("Trying to draw a pPos[j]->getX()%f", pPos[j]->getX());
+
+            TTT(0, pPos[j]); // x
         }
         if (displayArr[j] == 2){
-            TTT(1, *i); // o
+            TTT(1, pPos[j]); // o
         }
-
-        j++;
     }
+    
+    
+//    std::cout << "pPos[0]->getX() = " << pPos[0]->getX() << std::endl;
+//    int j = 0;
+//    for (vector<Vec*>::iterator i = pPos.begin(); i != pPos.end(); i++) {
+//        
+//        for (int k = 0; k <= 9; k++) { //hardcoded for because it was overflowing with sizeof
+//            std::cout << "displayArr[" << k << "] = " << displayArr[k] << std::endl;
+//        }
+//        if (displayArr[j] == 1){
+//            TTT(0, *i); // x
+//        }
+//        if (displayArr[j] == 2){
+//            TTT(1, *i); // o
+//        }
+//
+//        j++;
+//    }
 
-	std::cout << "rVec.size() = " << rVec.size() << std::endl;
+	//std::cout << "rVec.size() = " << rVec.size() << std::endl;
 	for (int i = 0; i < rVec.size(); i++)
 		rVec[i]->build();
-    
-
-	//App::rVec[0]->build;
-	//App::rVec[1]->build;
-
-
-	//rVec[0]->build();
-    //rVec[1]->build();
     
     // We have been drawing everything to the back buffer
     // Swap the buffers to see the result of what we drew
@@ -187,35 +144,26 @@ void App::mouseDown(float x, float y){
     // Update app state
     mx = x;
     my = y;
-    
 
-	bool found = 0;
-
-	// swap the rectanges
-	for (int i = rVec.size() - 1; i >= 0; i--) {
+	for (int i = 0 ; i < 9; i++) { //hardcoded because overflow problems
+        
+        //play by yourself mode
 		if (rVec[i]->contains(x,y)) {
-            //pPos[i]->setCircle(!pPos[i]->getCircle());
-            
-            //if x turn
-            displayArr[i] = 1;
-            
-            std::swap(rVec[i], rVec.front());
-            
-			found = 1;
-            App::draw();
-		}
-	}
-	//deselect if needed
-	for (int i = rVec.size() - 1; i >= 0; i--) {
-		if (found) {
-            displayArr[i] = 0;
-			rVec[i]->color = 0;
+            if (playerTurn && playArr[i] == 1){
+                printf("We're on rVec[%d]\n",i);
+                displayArr[i] = 1;
+                //App::draw();
+            } else if (!playerTurn && playArr[i] == 1){
+                displayArr[i] = 2;
+            }
+            playArr[i] = 0;
+            playerTurn = !playerTurn;
 		}
 	}
 
     ////recContains(rVec.front(), x, y);
     // Redraw the scene
-    redraw();
+    redraw(); //TODO should I readd this?
 }
 
 void App::mouseDrag(float x, float y){

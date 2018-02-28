@@ -16,9 +16,9 @@ private:
 	//int position = 1;
 	bool circle = false;
 public:
-
+    vector<Vec*> data;
 	TTT(bool circle, Vec * v) {
-		vector<Vec*> data;
+        data.clear();
 		
 
 		if (circle) {
@@ -46,8 +46,6 @@ public:
 			glEnd();
 
 		}
-
-
 	}
 
 };
