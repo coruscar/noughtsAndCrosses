@@ -26,7 +26,11 @@ public:
     void mouseDown(float x, float y);
     void mouseDrag(float x, float y);
     int checkWin(int dA[]);
+    int sumSq(int a);
+    bool singleplayer = false;
+
     
+    bool gameOver = false;
     int displayArr[9];
     int playArr[9];
     int playerTurn = 1;
