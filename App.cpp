@@ -38,28 +38,84 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
     rVec.push_back(new Rect(.4, -.4 , .6, .6)); // 9
     
 
-    pPos.push_back(new Vec(-.7, .7, 0)); // 1
-	pPos.push_back(new Vec(0, .7, 0)); // 2
-	pPos.push_back(new Vec(.7, .7, 0)); // 3
+    pPos.push_back(new Vec(-.7, .7)); // 1
+	pPos.push_back(new Vec(0, .7)); // 2
+	pPos.push_back(new Vec(.7, .7)); // 3
 
-	pPos.push_back(new Vec(-.7, 0, 0)); // 4
-	pPos.push_back(new Vec(0, 0, 0)); // 5
-	pPos.push_back(new Vec(.7, 0, 0)); // 6
+	pPos.push_back(new Vec(-.7, 0)); // 4
+	pPos.push_back(new Vec(0, 0)); // 5
+	pPos.push_back(new Vec(.7, 0)); // 6
 
-	pPos.push_back(new Vec(-.7, -.7, 0)); // 7
-	pPos.push_back(new Vec(0, -.7, 0)); // 8
-	pPos.push_back(new Vec(.7, -.7, 0)); // 9
+	pPos.push_back(new Vec(-.7, -.7)); // 7
+	pPos.push_back(new Vec(0, -.7)); // 8
+	pPos.push_back(new Vec(.7, -.7)); // 9
 
 }
 
 void basicRec(float x, float y, float w, float h) {
-	//glColor3d(1.0, 1.0, 1.0);
+	glColor3d(1.0, 1.0, 1.0);
 	glBegin(GL_POLYGON);
 		glVertex2f(x, y);
 		glVertex2f(x, y - h);
 		glVertex2f(x + w, y - h);
 		glVertex2f(x + w, y);
 	glEnd();
+}
+
+void basicLine(float x, float y){
+    
+}
+
+int App::checkWin(int dA[]){ //returns 0 if nobody won, 1 if player 1, 2 if player 2
+    int mS[9] = {8,1,6,3,5,7,4,9,2}; //TODO move magic square somewhere central
+    if (dA[0]*mS[0] + dA[1]*mS[1] + dA[2]*mS[2] == 15){return 1; basicRec(pPos[0]->getX(),pPos[0]->getY(),1.4,.1);}
+    if (dA[0]*mS[0] + dA[1]*mS[1] + dA[2]*mS[2] == 30)
+        return 2;
+    
+    if (dA[3]*mS[3] + dA[4]*mS[4] + dA[5]*mS[5] == 15)
+        return 1;
+    if (dA[3]*mS[3] + dA[4]*mS[4] + dA[5]*mS[5] == 30)
+        return 2;
+    
+    if (dA[6]*mS[6] + dA[7]*mS[7] + dA[8]*mS[8] == 15)
+        return 1;
+    if (dA[6]*mS[6] + dA[7]*mS[7] + dA[8]*mS[8] == 30)
+        return 2;
+    
+    if (dA[0]*mS[0] + dA[4]*mS[4] + dA[8]*mS[8] == 15)
+        return 1;
+    if (dA[0]*mS[0] + dA[4]*mS[4] + dA[8]*mS[8] == 30)
+        return 2;
+    
+    if (dA[2]*mS[2] + dA[4]*mS[4] + dA[6]*mS[6] == 15)
+        return 1;
+    if (dA[2]*mS[2] + dA[4]*mS[4] + dA[6]*mS[6] == 30)
+        return 2;
+    
+    if (dA[0]*mS[0] + dA[3]*mS[3] + dA[6]*mS[6] == 15)
+        return 1;
+    if (dA[0]*mS[0] + dA[3]*mS[3] + dA[6]*mS[6] == 30)
+        return 2;
+    
+    if (dA[1]*mS[1] + dA[4]*mS[4] + dA[7]*mS[7] == 15)
+        return 1;
+    if (dA[1]*mS[1] + dA[4]*mS[4] + dA[7]*mS[7] == 30)
+        return 2;
+    
+    if (dA[2]*mS[2] + dA[5]*mS[5] + dA[8]*mS[8] == 15)
+        return 1;
+    if (dA[2]*mS[2] + dA[5]*mS[5] + dA[8]*mS[8] == 30)
+        return 2;
+    
+    
+    
+//    for (int i = 0; i < sizeof(displArr); i++){
+//        
+//        i = displArr[i] * magicSquare[i];
+//    }
+    
+    
+    return 0;
 }
 
 void App::draw() {
@@ -89,39 +145,31 @@ void App::draw() {
 
     
     printf("contense of displayArr[] {");
-    for (int k = 0; k < 9; k++) { //hardcoded for because it was overflowing with sizeof
+    for (int k = 0; k < 9; k++) { //hardcoded for because it was overflowing TODO fix
         printf("%d, ",displayArr[k]);
         //std::cout << "displayArr[" << k << "] = " << displayArr[k] << std::endl;
     }
     printf("}\n");
-    for (int j = 0; j <= 9; j++){
+    
+    
+    
+    if (!(pPos.empty())){
+    for (int j = 0; j < 9; j++){
         if (displayArr[j] == 1){
             //printf("Trying to draw a pPos[j]->getX()%f", pPos[j]->getX());
-
             TTT(0, pPos[j]); // x
         }
         if (displayArr[j] == 2){
             TTT(1, pPos[j]); // o
         }
     }
+    }
     
+    int winVar = checkWin(displayArr);
+    if(winVar != 0){
+        printf("%d wins! \n",winVar);
+    }
     
-//    std::cout << "pPos[0]->getX() = " << pPos[0]->getX() << std::endl;
-//    int j = 0;
-//    for (vector<Vec*>::iterator i = pPos.begin(); i != pPos.end(); i++) {
-//        
-//        for (int k = 0; k <= 9; k++) { //hardcoded for because it was overflowing with sizeof
-//            std::cout << "displayArr[" << k << "] = " << displayArr[k] << std::endl;
-//        }
-//        if (displayArr[j] == 1){
-//            TTT(0, *i); // x
-//        }
-//        if (displayArr[j] == 2){
-//            TTT(1, *i); // o
-//        }
-//
-//        j++;
-//    }
 
 	//std::cout << "rVec.size() = " << rVec.size() << std::endl;
 	for (int i = 0; i < rVec.size(); i++)

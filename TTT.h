@@ -8,7 +8,9 @@
 #include "GenerateCircleData.h"
 
 
-using namespace std;
+
+//using namespace std;
+
 
 
 class TTT {
@@ -16,7 +18,7 @@ private:
 	//int position = 1;
 	bool circle = false;
 public:
-    vector<Vec*> data;
+    std::vector<Vec*> data;
 	TTT(bool circle, Vec * v) {
         data.clear();
 		
@@ -27,7 +29,7 @@ public:
 			glLineWidth(50);
 			glBegin(GL_LINE_STRIP);
 
-			for (vector<Vec*>::iterator i = data.begin(); i != data.end(); i++) {
+            for (std::vector<Vec*>::iterator i = data.begin(); i != data.end(); i++) {
 				glVertex2f((*i)->getX(), (*i)->getY());
 			}
 			glEnd();

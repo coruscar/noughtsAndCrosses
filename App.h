@@ -10,11 +10,12 @@ class App: public GlutApp {
     // Maintain app state here
     float mx;
     float my;
-	std::vector<Rect *> rVec; // Rectangle Vector
-	std::vector<Vec *> pPos; // Possible Positions
+
 
 
 public:
+    std::vector<Rect *> rVec; // Rectangle Vector
+    std::vector<Vec *> pPos; // Possible Positions
     // Constructor, to initialize state
     App(const char* label, int x, int y, int w, int h);
 
@@ -24,6 +25,7 @@ public:
     void recContains(Rect * r, float x, float y);
     void mouseDown(float x, float y);
     void mouseDrag(float x, float y);
+    int checkWin(int dA[]);
     
     int displayArr[9];
     int playArr[9];
