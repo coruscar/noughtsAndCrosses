@@ -11,7 +11,7 @@ class App: public GlutApp {
     float mx;
     float my;
 	std::vector<Rect *> rVec; // Rectangle Vector
-	std::vector<Vec *> pPos; // Possible Positions
+    std::vector<std::vector<float>> pPos; // Possible Positions
 
 
 public:

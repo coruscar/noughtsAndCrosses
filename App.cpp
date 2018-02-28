@@ -38,17 +38,19 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
     rVec.push_back(new Rect(.4, -.4 , .6, .6)); // 9
     
 
-    pPos.push_back(new Vec(-.7, .7, 0)); // 1
-	pPos.push_back(new Vec(0, .7, 0)); // 2
-	pPos.push_back(new Vec(.7, .7, 0)); // 3
-
-	pPos.push_back(new Vec(-.7, 0, 0)); // 4
-	pPos.push_back(new Vec(0, 0, 0)); // 5
-	pPos.push_back(new Vec(.7, 0, 0)); // 6
-
-	pPos.push_back(new Vec(-.7, -.7, 0)); // 7
-	pPos.push_back(new Vec(0, -.7, 0)); // 8
-	pPos.push_back(new Vec(.7, -.7, 0)); // 9
+    pPos = {{-.7, .7},{0,.7},{.7, .7},{-.7, 0},{0, 0},{.7, 0},{-.7, -.7},{0, -.7},{.7, -.7}};
+    
+//    pPos.push_back(new Vec(-.7, .7, 0)); // 1
+//	pPos.push_back(new Vec(0, .7, 0)); // 2
+//	pPos.push_back(new Vec(.7, .7, 0)); // 3
+//
+//	pPos.push_back(new Vec(-.7, 0, 0)); // 4
+//	pPos.push_back(new Vec(0, 0, 0)); // 5
+//	pPos.push_back(new Vec(.7, 0, 0)); // 6
+//
+//	pPos.push_back(new Vec(-.7, -.7, 0)); // 7
+//	pPos.push_back(new Vec(0, -.7, 0)); // 8
+//	pPos.push_back(new Vec(.7, -.7, 0)); // 9
 
 }
 
@@ -94,6 +96,7 @@ void App::draw() {
         //std::cout << "displayArr[" << k << "] = " << displayArr[k] << std::endl;
     }
     printf("}\n");
+    if (!pPos.empty()){
     for (int j = 0; j <= 9; j++){
         if (displayArr[j] == 1){
             //printf("Trying to draw a pPos[j]->getX()%f", pPos[j]->getX());
@@ -103,6 +106,7 @@ void App::draw() {
         if (displayArr[j] == 2){
             TTT(1, pPos[j]); // o
         }
+    }
     }
     
     
