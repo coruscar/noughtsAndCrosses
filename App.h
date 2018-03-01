@@ -27,6 +27,8 @@ public:
     void mouseDrag(float x, float y);
     int checkWin(int dA[]);
     int sumSq(int a);
+    int three(int a, int b, int c);
+
     bool singleplayer = false;
 
     

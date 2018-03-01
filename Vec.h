@@ -4,6 +4,7 @@
 class Vec {
     float x;
     float y;
+    float z;
 public:
     Vec (){
         x = 0;
@@ -13,6 +14,12 @@ public:
     Vec (double x, double y){
         this->x = x;
         this->y = y;
+    }
+    
+    Vec (double x, double y, double z){
+        this->x = x;
+        this->y = y;
+        this->z = z;
     }
     
     void add (Vec u){

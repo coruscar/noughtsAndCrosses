@@ -58,76 +58,33 @@ int App::sumSq(int a) {
     int mS[9] = {8,1,6,3,5,7,4,9,2}; //TODO move magic square somewhere central
     return displayArr[a]*mS[a];
 }
+int App::three(int a, int b, int c){
+    //Vec v(a, b, c);
+    int sum = 0;
+    sum = sumSq(a) + sumSq(b) + sumSq(c);
+    if (sum == 15){
+        displayArr[a] = 3; displayArr[b] = 3; displayArr[c] = 3;
+        return 1;
+    }
+    if (sum == 30){
+        displayArr[a] = 4; displayArr[b] = 4; displayArr[c] = 4;
+        return 2;
+    }
+    return 0;
+}
 
 int App::checkWin(int dA[]){ //returns 0 if nobody won, 1 if player 1, 2 if player 2
+    if (gameOver) return 0;
     
-    if (gameOver)
-        return 0;
+    int retval = 0;
+    for (int i = 0; i < 10; i = i + 3)
+        if (!retval) retval = three(i,i+1,i+2);
+    for (int i = 0; i < 10; i++)
+        if (!retval) retval = three(i,i+3,i+6);
+    if (!retval) retval = three(0,4,8);
+    if (!retval) retval = three(2,4,6);
     
-    int sum = 0;
-    for (int i = 0; i < 10; i = i + 3){
-        sum = sumSq(i) + sumSq(i+1) +sumSq(i+2);
-        if (sum == 15){
-            displayArr[i] = 3; displayArr[i+1] = 3; displayArr[i+2] = 3;
-            return 1;
-        }
-        if (sum == 30){
-            displayArr[i] = 4; displayArr[i+1] = 4; displayArr[i+2] = 4;
-            return 2;
-        }
-    }
-    sum = sumSq(0) + sumSq(4) + sumSq(8);
-    if (sum == 15){
-        displayArr[0] = 3; displayArr[4] = 3; displayArr[8] = 3;
-        return 1;
-    }
-    if (sum == 30){
-        displayArr[0] = 4; displayArr[4] = 4; displayArr[8] = 4;
-        return 2;
-    }
-    
-    sum = sumSq(2) + sumSq(4) + sumSq(6);
-    if (sum == 15){
-        displayArr[2] = 3; displayArr[4] = 3; displayArr[6] = 3;
-        return 1;
-    }
-    if (sum == 30){
-        displayArr[2] = 4; displayArr[4] = 4; displayArr[6] = 4;
-        return 2;
-    }
-    
-    sum = sumSq(0) + sumSq(3) + sumSq(6);
-    if (sum == 15){
-        displayArr[0] = 3; displayArr[3] = 3; displayArr[6] = 3;
-        return 1;
-    }
-    if (sum == 30){
-        displayArr[0] = 4; displayArr[3] = 4; displayArr[6] = 4;
-        return 2;
-    }
-    
-    sum = sumSq(1) + sumSq(4) + sumSq(7);
-    if (sum == 15){
-        displayArr[1] = 3; displayArr[4] = 3; displayArr[7] = 3;
-        return 1;
-    }
-    if (sum == 30){
-        displayArr[1] = 4; displayArr[4] = 4; displayArr[7] = 4;
-        return 2;
-    }
-    
-    sum = sumSq(2) + sumSq(5) + sumSq(8);
-    if (sum == 15){
-        displayArr[2] = 3; displayArr[5] = 3; displayArr[8] = 3;
-        return 1;
-    }
-    if (sum == 30){
-        displayArr[2] = 4; displayArr[5] = 4; displayArr[8] = 4;
-        return 2;
-    }
-    
-    
-    return 0;
+    return retval;
 }
 
 void App::draw() {
@@ -204,13 +161,6 @@ void App::draw() {
     glFlush();
     glutSwapBuffers();
 }
-//void App::recContains(Rect * r, float x, float y){
-//    if(r->contains(x,y)){
-//        r->color = 1;
-//        r->build();
-//    } else
-//        r->color = 0;
-//}
 
 void App::mouseDown(float x, float y){
     // Update app state
@@ -253,8 +203,10 @@ void App::mouseDown(float x, float y){
                             playArr[j] = 0;
                             break;
                         }
-                        if (playArr[8] == 0 && j == 8)
-                            j = 0;
+                        if (playArr[8] == 0 && j == 8){
+                            displayArr[8] = 2;
+                            playArr[8] = 0;
+                        }
                     }
                 }
             }
