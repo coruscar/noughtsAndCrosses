@@ -167,8 +167,8 @@ void App::mouseDown(float x, float y){
         
         //friends
         if (!singleplayer){
-            if (rVec[i]->contains(x,y) && !gameOver) {
-                if (playerTurn && playArr[i] == 1){
+            if (rVec[i]->contains(x,y) && !gameOver && playArr[i] == 1) {
+                if (playerTurn){
                     displayArr[i] = 1;
                 } else if (!playerTurn && playArr[i] == 1){
                     displayArr[i] = 2;
@@ -179,10 +179,8 @@ void App::mouseDown(float x, float y){
         }
         //ai
         if (singleplayer){
-            if (rVec[i]->contains(x,y) && !gameOver) {
-                if (playArr[i] == 1){
-                    displayArr[i] = 1;
-                }
+            if (rVec[i]->contains(x,y) && !gameOver && playArr[i] == 1) {
+                displayArr[i] = 1;
                 playArr[i] = 0;
                 //printf("what's going on \n");
                 
