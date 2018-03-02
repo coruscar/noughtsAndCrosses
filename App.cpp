@@ -12,7 +12,6 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
     for (int i = 0; i < 9; i++) {playArr[i] = 1;}
     
     
-    
     rVec.push_back(new Rect(-1, 1 , .6, .6)); // 1
     rVec.push_back(new Rect(-.3, 1, .6, .6)); // 2
     rVec.push_back(new Rect(.4, 1 , .6, .6)); // 3
@@ -50,16 +49,12 @@ void basicRec(float x, float y, float w, float h) {
     glEnd();
 }
 
-void basicLine(float x, float y){
-    
-}
 
 int App::sumSq(int a) {
     int mS[9] = {8,1,6,3,5,7,4,9,2}; //TODO move magic square somewhere central
     return displayArr[a]*mS[a];
 }
 int App::three(int a, int b, int c){
-    //Vec v(a, b, c);
     int sum = 0;
     sum = sumSq(a) + sumSq(b) + sumSq(c);
     if (sum == 15){
@@ -77,10 +72,11 @@ int App::checkWin(int dA[]){ //returns 0 if nobody won, 1 if player 1, 2 if play
     if (gameOver) return 0;
     
     int retval = 0;
-    for (int i = 0; i < 10; i = i + 3)
+    for (int i = 0; i < 10; i += 3)
         if (!retval) retval = three(i,i+1,i+2);
     for (int i = 0; i < 10; i++)
-        if (!retval) retval = three(i,i+3,i+6);
+        if (!retval)
+            retval = three(i,i+3,i+6);
     if (!retval) retval = three(0,4,8);
     if (!retval) retval = three(2,4,6);
     
@@ -133,7 +129,7 @@ void App::draw() {
             }
             //should only happen if game is over
             if (displayArr[j] == 3){
-                printf("This should be printed once on index = %d\n",j);
+                printf("This should be printed once. We're at index %d\n",j);
                 TTT(0, pPos[j],1); //colored x
             }
             //should only happen if game is over
@@ -173,9 +169,7 @@ void App::mouseDown(float x, float y){
         if (!singleplayer){
             if (rVec[i]->contains(x,y) && !gameOver) {
                 if (playerTurn && playArr[i] == 1){
-                    printf("We're on rVec[%d]\n",i);
                     displayArr[i] = 1;
-                    //App::draw();
                 } else if (!playerTurn && playArr[i] == 1){
                     displayArr[i] = 2;
                 }
@@ -191,8 +185,13 @@ void App::mouseDown(float x, float y){
                 }
                 playArr[i] = 0;
                 //printf("what's going on \n");
+                
+                
                 int count = 0;
-                for (int j = 0; j < 9; j++) {if (playArr[j] == 1)count ++;}
+                for (int j = 0; j < 9; j++) {
+                    if (playArr[j] == 1)
+                        count++;
+                }
                 
                 if (count > 1){
                     for (int j = 0; j < 9 ;j++){
@@ -227,6 +226,7 @@ void App::mouseDrag(float x, float y){
 
 void App::keyPress(unsigned char key) {
     if (key == 27){
+        //    if (key == 'y'){
         singleplayer = !singleplayer;
         // Exit the app when Esc key is pressed
         //exit(0);

@@ -14,7 +14,9 @@ public:
     std::vector<Vec*> data;
 	TTT(bool circle, Vec * v, int win) {
         data.clear();
+        
         glClearColor(0.0, 0.0, 0.0, 1.0);
+        
         if (win)
             glColor3f(0.0, 1.0, 0.0);
         else

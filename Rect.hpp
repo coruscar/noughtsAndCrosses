@@ -13,15 +13,14 @@ public:
     
     
     void build(){
-        if(color == 1) {
+        if(color == 1)
             glColor3f(1.0,1.0,0.0); // RedGreen
-        } else if (color == 2) {
+        else if (color == 2)
             glColor3f(0.0, 0.0, 1.0); // Blue
-        } else if (color == 3) {
+        else if (color == 3)
             glColor3f(1.0, 1.0, 1.0); //White
-        } else {
+        else
             glColor3f(0.0,0.0,0.0); // Black
-        }
         glBegin(GL_POLYGON);
             glVertex2f(x, y);
             glVertex2f(x, y-h);
