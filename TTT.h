@@ -27,9 +27,16 @@ public:
 		if (circle) {
 			generateCircleData(data, *v, .23, 100);
 			glBegin(GL_LINE_STRIP);
-            for (std::vector<Vec*>::iterator i = data.begin(); i != data.end(); i++) {
-				glVertex2f((*i)->getX(), (*i)->getY());
+			for (int i = 0; i < data.size()-1; i++) {
+				printf("data[i]->getX() = %f, data[i]->getY() = %f\n", data[i]->getX(), data[i]->getY());
+				glVertex2f(data[i]->getX(), data[i]->getY());
 			}
+			//glVertex2f(data[data.size() - 1]->getX()+.01, data[data.size() - 1]->getY() + .01);
+
+
+   //         for (std::vector<Vec*>::iterator i = data.begin(); i != data.end(); i++) {
+			//	glVertex2f((*i)->getX(), (*i)->getY());
+			//}
 			glEnd();
 		}
         

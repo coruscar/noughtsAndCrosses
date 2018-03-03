@@ -10,7 +10,7 @@
     <ClInclude Include="..\GlutApp.h" />
     <ClInclude Include="..\Rect.hpp" />
     <ClInclude Include="TTT.h" />
-    <ClInclude Include="GenerateCircleData.h" />
     <ClInclude Include="Vec.h" />
+    <ClInclude Include="..\GenerateCircleData.h" />
   </ItemGroup>
 </Project>

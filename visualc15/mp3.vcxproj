@@ -121,9 +121,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\App.h" />
+    <ClInclude Include="..\GenerateCircleData.h" />
     <ClInclude Include="..\GlutApp.h" />
     <ClInclude Include="..\Rect.hpp" />
-    <ClInclude Include="GenerateCircleData.h" />
     <ClInclude Include="TTT.h" />
     <ClInclude Include="Vec.h" />
   </ItemGroup>
